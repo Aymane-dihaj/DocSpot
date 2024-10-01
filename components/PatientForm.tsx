@@ -35,7 +35,15 @@ const PatientForm = () => {
                     <h1 className="header">Hi there👋</h1>
                     <p className="text-dark-700">Schedule your first oppointment.</p>
                 </section>
-                <FormField control={form.control} name="username"/>
+                
+        <FormField
+          control={form.control}
+          name="name"
+          label="Full name"
+          placeholder="John Doe"
+          iconSrc="/assets/icons/user.svg"
+          iconAlt="user"
+        />
             <Button type="submit">Submit</Button>
             </form>
         </Form>

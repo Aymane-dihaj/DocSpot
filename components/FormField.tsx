@@ -1,37 +1,70 @@
-import {FormControl,
-FormDescription,
-FormItem,
-FormLabel,
-FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Control, Controller } from "react-hook-form"
+/* eslint-disable no-unused-vars */
+import Image from "next/image";
+import { Control } from "react-hook-form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
-interface FieldProps{
-    control: Control<any>,
-    name: string,
+export enum FormFieldType {
+  INPUT = "input",
+  TEXTAREA = "textarea",
+  PHONE_INPUT = "phoneInput",
+  CHECKBOX = "checkbox",
+  DATE_PICKER = "datePicker",
+  SELECT = "select",
+  SKELETON = "skeleton",
 }
 
-const FormField = ({ control, name }: FieldProps) => {
+interface CustomProps {
+  control: Control<any>;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  iconSrc?: string;
+  iconAlt?: string;
+  disabled?: boolean;
+  dateFormat?: string;
+  showTimeSelect?: boolean;
+  children?: React.ReactNode;
+  renderSkeleton?: (field: any) => React.ReactNode;
+}
+
+const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
+      return (
+        <FormControl>
+          <Textarea
+            placeholder={props.placeholder}
+            {...field}
+            className="shad-textArea"
+            disabled={props.disabled}
+          />
+        </FormControl>
+      );
+}
+
+const CustomFormField = (props: CustomProps) => {
+  const { control, name, label } = props;
+
   return (
     <FormField
-                control={control}
-                name="username"
-                // render={({ field }) => (
-                // <FormItem>
-                //     <FormLabel>Username</FormLabel>
-                //     <FormControl>
-                //     <Input placeholder="Enter your username" {...field} />
-                //     </FormControl>
-                //     <FormDescription>
-                //     This is your public display name.
-                //     </FormDescription>
-                //     <FormMessage />
-                // </FormItem>
-                // )}
-            />
-    // <h1>hello</h1>
-  )
-}
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem className="flex-1">
+            <FormLabel className="shad-input-label">{label}</FormLabel>
+          <RenderInput field={field} props={props} />
 
-export default FormField
+          <FormMessage className="shad-error" />
+        </FormItem>
+      )}
+    />
+  );
+};
+
+export default CustomFormField;
