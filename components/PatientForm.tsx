@@ -4,9 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
-import { Form } from "react-hook-form"
-import FormField from "./FormField"
-
+import { Form } from "./ui/form"
+import CustomFormField from "./CustomFormField"
  
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -14,7 +13,7 @@ const formSchema = z.object({
   }),
 })
  
-const PatientForm = () => {
+export const PatientForm = () => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -25,29 +24,22 @@ const PatientForm = () => {
  
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
     console.log(values)
   }
-
   return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <section className="mb-12 space-y-4">
-                    <h1 className="header">Hi there👋</h1>
-                    <p className="text-dark-700">Schedule your first oppointment.</p>
-                </section>
-                
-        <FormField
-          control={form.control}
-          name="name"
-          label="Full name"
-          placeholder="John Doe"
-          iconSrc="/assets/icons/user.svg"
-          iconAlt="user"
-        />
-            <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
+        <section className="mb-12 space-y-4">
+          <h1 className="header">Hi there👋</h1>
+          <p className="text-dark-700">Schedule your first appointment...</p>
+        </section>
+        <CustomFormField control={form.control} name='username'/>
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   )
 }
 
-export default PatientForm; 
+export default PatientForm;

@@ -34,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" href="/assets/Logo.svg" as="image" type="image/svg+xml" />
+      </head>
       <body
         className={cn('min-h-screen bg-dark-300 font-sans antialiased', fontSans.variable)}
       >
