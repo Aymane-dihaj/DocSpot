@@ -11,7 +11,7 @@ import {
   } from "@/components/ui/form"
   import { Input } from "@/components/ui/input"
 import { Control } from "react-hook-form"
-import { FormFieldType } from "./PatientForm"
+import { FormFieldType } from "./forms/PatientForm"
 import Image from "next/image"
 import { E164Number } from "libphonenumber-js/core" 
 import 'react-phone-number-input/style.css'

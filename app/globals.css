@@ -71,7 +71,7 @@
   }
 
   .side-img {
-    @apply hidden h-full object-cover lg:block;
+    @apply hidden h-full object-cover md:block;
   }
 
   .copyright {
